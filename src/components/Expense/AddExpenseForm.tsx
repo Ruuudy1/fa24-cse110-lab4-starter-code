@@ -1,46 +1,42 @@
-import React, { useState } from "react";
-const AddExpenseForm = () => {
-  // Exercise: Consume the AppContext here
+import { useContext, useState } from "react";
+import { AppContext } from "../../context/AppContext";
 
-  // Exercise: Create name and cost to state variables
+const AddExpenseForm: React.FC = () => {
+  const { expenses, setExpenses } = useContext(AppContext);
+  const [name, setName] = useState('');
+  const [cost, setCost] = useState('');
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleAddExpense = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (name.trim() === '' || cost.trim() === '') return;
 
-    // Exercise: Add add new expense to expenses context array
+    const newExpense = {
+      id: Math.random().toString(), // Generate a unique ID
+      name,
+      cost: parseFloat(cost),
+    };
+
+    setExpenses([...expenses, newExpense]);
+
+    setName('');
+    setCost('');
   };
 
   return (
-    <form onSubmit={(event) => onSubmit(event)}>
-      <div className="row">
-        <div className="col-sm">
-          <label htmlFor="name">Name</label>
-          <input
-            required
-            type="text"
-            className="form-control"
-            id="name"
-            value={""}
-            // HINT: onChange={}
-          ></input>
-        </div>
-        <div className="col-sm">
-          <label htmlFor="cost">Cost</label>
-          <input
-            required
-            type="text"
-            className="form-control"
-            id="cost"
-            value={0}
-            // HINT: onChange={}
-          ></input>
-        </div>
-        <div className="col-sm">
-          <button type="submit" className="btn btn-primary mt-3">
-            Save
-          </button>
-        </div>
-      </div>
+    <form onSubmit={handleAddExpense}>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Cost"
+        value={cost}
+        onChange={(e) => setCost(e.target.value)}
+      />
+      <button type="submit">Save</button>
     </form>
   );
 };
