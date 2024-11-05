@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome MindfulU test welcome popup!</title>
+  <style>
+    /* Style for the overlay */
+    .overlay {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */ 
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Style for the popup box */
+    .popup {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button to close the popup */
+    .close-btn {
+      background: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay and Popup -->
+  <div class="overlay" id="welcomeOverlay">
+    <div class="popup">
+      <h2>Welcome MindfulU!</h2>
+      <p>How familiar are you with meditation?</p>
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Display the popup when the page loads
+    window.onload = function() {
+      document.getElementById("welcomeOverlay").style.display = "flex";
+    };
+
+    // Function to close the popup
+    function closePopup() {
+      document.getElementById("welcomeOverlay").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
