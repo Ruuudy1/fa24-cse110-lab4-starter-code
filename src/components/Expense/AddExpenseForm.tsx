@@ -5,21 +5,24 @@ const AddExpenseForm: React.FC = () => {
   const { expenses, setExpenses } = useContext(AppContext);
   const [name, setName] = useState('');
   const [cost, setCost] = useState('');
+  const [description, setDescription] = useState(''); // New state for description
 
   const handleAddExpense = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim() === '' || cost.trim() === '') return;
+    if (name.trim() === '' || cost.trim() === '' || description.trim() === '') return;
 
     const newExpense = {
-      id: Math.random().toString(), // Generate a unique ID
+      id: Math.random().toString(),
       name,
       cost: parseFloat(cost),
+      description,
     };
 
     setExpenses([...expenses, newExpense]);
 
     setName('');
     setCost('');
+    setDescription(''); // Reset description field
   };
 
   return (
@@ -35,6 +38,12 @@ const AddExpenseForm: React.FC = () => {
         placeholder="Cost"
         value={cost}
         onChange={(e) => setCost(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <button type="submit">Save</button>
     </form>
